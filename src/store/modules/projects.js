@@ -32,6 +32,10 @@ const actions = {
     const projectData = JSON.parse(localStorage.getItem(`project.${project_id}`));
     commit('SET_PROJECT', projectData);
   },
+
+	deleteProject({ commit }, project_id) {
+    commit('DELETE_PROJECT', project_id);
+  },
 };
 
 const mutations = {
@@ -53,6 +57,15 @@ const mutations = {
     state.projects.push({ id: project_id, name });
     localStorage.setItem('projects', JSON.stringify({ next_id: state.next_id, list: state.projects }));
     localStorage.setItem(`project.${project_id}`, '[]');
+  },
+
+	DELETE_PROJECT(state, project_id) {
+    const projectIndex = state.projects.findIndex(p => p.id == project_id);
+    if (projectIndex > -1) {
+      state.projects.splice(projectIndex, 1);
+      localStorage.setItem('projects', JSON.stringify({ next_id: state.next_id, list: state.projects }));
+      localStorage.removeItem(`project.${project_id}`);
+    }
   },
 };
 
