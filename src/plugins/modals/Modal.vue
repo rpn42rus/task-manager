@@ -1,5 +1,5 @@
 <script setup>
-import { inject, computed } from "vue"
+import { computed, inject } from "vue"
 const
     $props = defineProps({
         name: { type: String, default: "" },
@@ -30,10 +30,10 @@ function closeModal(accept = false) {
             </main>
             <footer class="w3-right-align w3-blue w3-padding">
                 <button class="w3-button " @click="closeModal(true)">
-                    Accept
+                    Принять
                 </button>
                 <button class="w3-button " @click="closeModal(false)">
-                    Cancel
+                    Отмена
                 </button>
             </footer>
         </div>

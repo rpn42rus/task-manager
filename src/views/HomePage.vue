@@ -11,8 +11,17 @@ onMounted(() => {
 	console.log('store', store)
 })
 
-function newProject() {
-	_project_name.value = ""
+async function newProject() {
+  _project_name.value = "";
+  try {
+    await $modals.show("#NewProject");
+    if (_project_name.value !== "") {
+      await store.dispatch("projects/createProject", _project_name.value);
+      await store.dispatch("projects/updateProjects");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 </script>
 
@@ -20,21 +29,18 @@ function newProject() {
 	<div class="landing-wrapper">
 		<h1 class="w3-bottombar">
 			<i class="fa-solid fa-list-check w3-text-purple"></i>
-			Landing page
+			Home Page
 		</h1>
 		<p>
-			You can create a new project or select one from the sidebar.
-		</p>
-		<p>
-			This route was defined as static in our router.
+			Вы можете создать новый проект или выбрать его из боковой панели.
 		</p>
 		<button @click="newProject()">
-			New project
+			Создать проект
 		</button>
 
 		<!-- Modals -->
 		<Modal name="#NewProject" title="Новый проект">
-			<strong>Name</strong>
+			<strong>Имя</strong>
 			<input type="text" class="w3-input w3-border" placeholder="Введите имя проекта..." v-model="_project_name">
 		</Modal>
 	</div>

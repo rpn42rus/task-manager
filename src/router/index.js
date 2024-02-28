@@ -7,6 +7,12 @@ const routes = [
 		name: 'home',
 		component: HomePage,
 	},
+	{
+		path: '/project/:id',
+		name: 'project',
+		component: () => import('../views/ProjectPage.vue'),
+		props: true,
+	},
 ],
 	router = createRouter({
 		history: createWebHashHistory(),

@@ -1,8 +1,10 @@
 <script setup>
+import Sidebar from '@components/sidebar/Sidebar.vue'
 </script>
 
 <template>
     <div class="app">
+        <Sidebar></Sidebar>
         <main>
             <router-view></router-view>
         </main>
