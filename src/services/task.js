@@ -1,7 +1,6 @@
 const service = {
 	/**
-	 * Создает task по умолчанию с уникальным идентификатором, пустым текстом и состоянием, установленным на 'not_started'.
-	 * @returns {Object} task по умолчанию.
+	 * Получение задачи по умолчанию с уникальным идентификатором, пустым текстом и статусом
 	 */
 	getDefault() {
 		return {
@@ -14,8 +13,7 @@ const service = {
 		}
 	},
 	/**
-	 * Возвращает массив объектов состояния с их идентификаторами и лейблами.
-	 * @returns {Array} Список статусов.
+	 * Получения списка статусов задач
 	 */
 	getStatusList() {
 		return [
@@ -25,13 +23,24 @@ const service = {
 		]
 	},
 	/**
-	 * Создание глубокой копии элемента task с использованием сериализации и десериализации JSON
-	 * @param {Object} item - Task, который нужно скопировать
-	 * @returns {Object} Копия task.
+	 * Создание глубокой копии элемента задачи
 	 */
 	makeCopy(item) {
 		return JSON.parse(JSON.stringify(item))
 	},
+		/**
+	 * Переключение статуса задачи в зависимости от состояния
+	 */
+		toggleStatus(status) {
+			switch (status) {
+				case 'not_started':
+					return 'in_progress'
+				case 'in_progress':
+					return 'completed'
+				case 'completed':
+					return 'not_started'
+			}
+		},
 }
 
 export default service

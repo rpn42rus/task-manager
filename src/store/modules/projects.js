@@ -1,7 +1,6 @@
 const state = () => ({
   projects: [],
   next_id: 0,
-	current_project: {}
 });
 
 const getters = {
@@ -22,38 +21,25 @@ const actions = {
   },
 
   createProject({ commit }, name = '') {
-		console.log('name', name)
     commit('CREATE_PROJECT', name);
   },
 
 	loadProject({ commit }, project_id) {
-    const projectData = JSON.parse(localStorage.getItem(`project.${project_id}`));
-		console.log('projectData', projectData)
-    commit('SET_PROJECT', projectData);
+    return JSON.parse(localStorage.getItem(`project.${project_id}`));
   },
 
 	deleteProject({ commit }, project_id) {
     commit('DELETE_PROJECT', project_id);
   },
 
-	saveProject({ commit }, project_id, data) {
-		commit('SAVE_PROJECT', project_id, data);
+	saveProject({ commit }, data) {
+    localStorage.setItem(`project.${data.id}`, JSON.stringify(data.items))
 	},
 };
 
 const mutations = {
   SET_PROJECTS(state, projects) {
     state.projects = projects;
-  },
-
-	SET_PROJECT(state, projectData) {
-    state.current_project = projectData;
-  },
-
-	SAVE_PROJECT(state, project_id, data) {
-		console.log('project_id', project_id)
-		console.log('data', data)
-		// localStorage.setItem(`project.${project_id}`, JSON.stringify(data))
   },
 
   SET_NEXT_ID(state, next_id) {
