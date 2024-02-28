@@ -1,9 +1,15 @@
 <script setup>
-import { inject, ref } from "vue"
+import { inject, onMounted, ref } from "vue"
+import { useStore } from "vuex"
 
 const
+	store = useStore(),
 	$modals = inject("$modals"),
 	_project_name = ref("")
+
+onMounted(() => {
+	console.log('store', store)
+})
 
 function newProject() {
 	_project_name.value = ""

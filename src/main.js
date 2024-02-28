@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
 import Modals from './plugins/modals'
-import styles from './assets/styles.css'
+import router from './router'
+import store from './store'
 
-createApp(App).use(router).use(Modals).mount('#app')
+createApp(App).use(router).use(store).use(Modals).mount('#app')
