@@ -1,5 +1,5 @@
 <script setup>
-import { inject, onMounted, ref } from "vue"
+import { inject, ref } from "vue"
 import { useStore } from "vuex"
 
 const
@@ -7,21 +7,17 @@ const
 	$modals = inject("$modals"),
 	_project_name = ref("")
 
-onMounted(() => {
-	console.log('store', store)
-})
-
 async function newProject() {
-  _project_name.value = "";
-  try {
-    await $modals.show("#NewProject");
-    if (_project_name.value !== "") {
-      await store.dispatch("projects/createProject", _project_name.value);
-      await store.dispatch("projects/updateProjects");
-    }
-  } catch (error) {
-    console.error(error);
-  }
+	_project_name.value = ""
+	try {
+		await $modals.show("#NewProject")
+		if (_project_name.value !== "") {
+			await store.dispatch("projects/createProject", _project_name.value)
+			// await store.dispatch("projects/loadProjectsManifest");
+		}
+	} catch (error) {
+		console.error(error)
+	}
 }
 </script>
 
