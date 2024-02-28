@@ -1,4 +1,5 @@
 <script setup>
+import TaskFilter from "@components/tasks/TaskFilter.vue"
 import TaskSummary from "@components/tasks/TaskSummary.vue"
 import { inject, onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
@@ -31,25 +32,25 @@ function deleteProject() {
 }
 
 function showModal(new_item = true, item = {}) {
-    if (new_item) {
-        _item.value = taskService.getDefault()
-    } else {
-        _item.value = taskService.makeCopy(item)
-    }
+	if (new_item) {
+		_item.value = taskService.getDefault()
+	} else {
+		_item.value = taskService.makeCopy(item)
+	}
 
-    $modals.show("newEditItem").then(() => {
-        if (new_item) {
-            _items.value.push(_item.value)
-        } else {
-            let index = getIndex(item)
-            if (index >= 0) {
-                _items.value[index] = _item.value
-            } else {
-                alert("Error updating the item")
-            }
-        }
-        saveProject()
-    }, () => {})
+	$modals.show("newEditItem").then(() => {
+		if (new_item) {
+			_items.value.push(_item.value)
+		} else {
+			let index = getIndex(item)
+			if (index >= 0) {
+				_items.value[index] = _item.value
+			} else {
+				alert("Error updating the item")
+			}
+		}
+		saveProject()
+	}, () => { })
 }
 
 function saveProject() {
@@ -57,14 +58,14 @@ function saveProject() {
 }
 
 function getIndex(item) {
-    let index = _items.value.findIndex(it => {
-        return it.id == item.id
-    })
-    if (index == -1) {
-        return false
-    } else {
-        return index
-    }
+	let index = _items.value.findIndex(it => {
+		return it.id == item.id
+	})
+	if (index == -1) {
+		return false
+	} else {
+		return index
+	}
 }
 
 </script>
@@ -79,6 +80,9 @@ function getIndex(item) {
 		<!-- Summary -->
 		<TaskSummary :items="_items" class="w3-margin-bottom"></TaskSummary>
 		<!-- Filter bar -->
+		<div class="w3-margin-bottom">
+			<TaskFilter v-model="_filter" class="flex-grow"></TaskFilter>
+		</div>
 	</div>
 
 	<Modal name="deleteProject" title="Delete the Project">

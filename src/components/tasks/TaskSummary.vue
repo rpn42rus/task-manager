@@ -1,10 +1,10 @@
 <script setup>
-import { computed } from 'vue'
-import taskService from '../../services/task'
+import { computed } from "vue"
+import taskService from "../../services/task"
 
 const
     $props = defineProps({
-        items: { type: Array, default: () => [] },
+        items: { type: Array, default: () => [] }
     }),
     _status = computed(() => {
         let status = {}
@@ -19,20 +19,20 @@ const
 </script>
 
 <template>
-    <div class="summary-wrapper">
-        <div class="w3-light-gray">
-            <strong>Ожидают</strong>
-            <h2>{{ _status?.not_started }}</h2>
-        </div>
-        <div class="w3-teal">
-            <strong>В процессе</strong>
-            <h2>{{ _status?.in_progress }}</h2>
-        </div>
-        <div class="w3-green">
-            <strong>Завершенные</strong>
-            <h2>{{ _status?.completed }}</h2>
-        </div>
-    </div>
+	<div class="summary-wrapper">
+			<div class="w3-light-gray">
+					<strong>Ожидают</strong>
+					<h2>{{ _status?.not_started }}</h2>
+			</div>
+			<div class="w3-teal">
+					<strong>В процессе</strong>
+					<h2>{{ _status?.in_progress }}</h2>
+			</div>
+			<div class="w3-green">
+					<strong>Завершенные</strong>
+					<h2>{{ _status?.completed }}</h2>
+			</div>
+	</div>
 </template>
 
 <style scoped>
@@ -46,7 +46,7 @@ const
     padding: 1rem;
 }
 
-h2/t {
+h2 {
     font-size: 3rem;
     margin: 0;
 }
