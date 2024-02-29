@@ -13,7 +13,6 @@ async function newProject() {
 		await $modals.show("#NewProject")
 		if (_project_name.value !== "") {
 			await store.dispatch("projects/createProject", _project_name.value)
-			// await store.dispatch("projects/loadProjectsManifest");
 		}
 	} catch (error) {
 		console.error(error)

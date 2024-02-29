@@ -21,19 +21,16 @@ const
 onMounted(loadProject)
 
 watch(() => $props.id, loadProject)
-
 async function loadProject() {
 	_project_name.value = store.getters["projects/getProjectName"]($props.id)
 	_items.value = await store.dispatch("projects/loadProject", $props.id) || []
 }
-
 function deleteProject() {
 	$modals.show("deleteProject").then(() => {
 		store.dispatch('projects/deleteProject', $props.id)
 		$router.push({ name: "home" })
 	}, () => { })
 }
-
 function showModal(new_item = true, item = {}) {
 	if (new_item) {
 		_item.value = taskService.getDefault()
@@ -57,7 +54,6 @@ function showModal(new_item = true, item = {}) {
 		saveProject()
 	}, () => { })
 }
-
 function toggleStatus(item) {
 	item.status = taskService.toggleStatus(item.status)
 	saveProject()
@@ -108,28 +104,27 @@ function deleteItem(item) {
 			@delete="deleteItem">
 			<button @click="showModal(true)" class="w3-button w3-blue w3-round-xxlarge">
 				<i class="fa-solid fa-square-plus"></i>
-				New item
+				Добавить задачу
 			</button>
 		</TaskList>
 	</div>
 
 	<!-- Modals -->
-	<Modal name="deleteProject" title="Delete the Project">
+	<Modal name="deleteProject" title="Удалить проект">
 		<h3>Подтверждение удаления</h3>
-		<p class="w3-pale-red w3-text-red w3-padding">Подтвердите удаление проекта.</p>
+		<p class="w3-pale-red w3-text-red w3-padding">Удалить проект - "{{ _project_name }}"</p>
 	</Modal>
 
-	<Modal name="newEditItem" title="To Do Item">
+	<Modal name="newEditItem" title="Добавить задачу">
 		<TaskItemForm v-model="_item"></TaskItemForm>
 	</Modal>
 
-	<Modal name="deleteItem" title="Delete To-Do Item">
+	<Modal name="deleteItem" title="Удалить задачу">
 		<p>
-			This action will delete the item:<br>
-			<strong>{{ _item.text }}</strong>
+			Подтверждение удаления задачи<br>
 		</p>
 		<p class="w3-text-red w3-pale-red">
-			This action cannot be undone.
+			Удалить задачу: <strong>{{ _item.text }}</strong>?
 		</p>
 	</Modal>
 </template>

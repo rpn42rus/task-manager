@@ -22,7 +22,7 @@ function publishValue() {
 <template>
   <div class="flex-container w3-border">
     <input type="text" class="w3-input w3-border-0" v-model="_value" @keyup="publishValue()"
-      placeholder="Enter filter text here...">
+      placeholder="Введите текст...">
     <button class="w3-border-0" @click="clear()">
       <i class="fas fa-fw fa-times"></i>
     </button>

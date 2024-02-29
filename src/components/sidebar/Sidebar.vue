@@ -5,22 +5,13 @@ import { useStore } from "vuex"
 const store = useStore()
 const projects = computed(() => store.getters["projects/getProjects"])
 
-onMounted(() => store.dispatch('projects/loadProjectsManifest'))
-
-// onBeforeUnmount(() => {
-// 	eventBus.off("#UpdateProjects", updateProjects)
-// })
-
-// function updateProjects() {
-// 	let projects = todoService.loadProjectsManifest()
-// 	_projects.value = projects.list
-// }
+onMounted(() => store.dispatch('projects/loadProjects'))
 
 </script>
 
 <template>
 	<section class="w3-blue ">
-		<h4 class="w3-row-padding">Projects</h4>
+		<h4 class="w3-row-padding">Task Manager</h4>
 
 		<RouterLink :to="{ name: 'home' }" class="w3-padding" active-class="w3-yellow">
 			Home

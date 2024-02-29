@@ -18,12 +18,12 @@ function emitUpdate() {
 <template>
   <div class="w3-cell-row w3-padding">
     <div class="w3-cell w3-padding">
-      <strong>Description</strong>
+      <strong>Описание</strong>
       <input type="text" class="w3-input w3-border" v-model.string="_item.text" @blur="emitUpdate()">
     </div>
 
     <div class="w3-cell w3-padding">
-      <strong>Status</strong>
+      <strong>Статус</strong>
       <select class="w3-select w3-border" v-model.string="_item.status" @change="emitUpdate()">
         <option v-for="state in taskService.getStatusList()" :key="state.id" :value="state.id">
           {{ state.label }}
